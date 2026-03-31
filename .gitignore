@@ -1,3 +1,4 @@
 .conda
-.claude
 .vscode
+.claude
+.eval-workspace
