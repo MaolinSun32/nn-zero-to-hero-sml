@@ -114,6 +114,7 @@ $$\frac{\partial L}{\partial x_i} = \frac{\gamma \cdot (\sigma^2+\epsilon)^{-1/2
 <!--SR:!2026-04-04,3,250-->
 
 
+
 logits_maxes 的梯度为什么需要 one-hot scatter？
 ?
 `logits_maxes = logits.max(1).values`，max 操作只从每行选了**最大值那一个**元素，
@@ -152,4 +153,187 @@ Softmax+CE 合并反传公式的推导，$i=y$ 和 $i \neq y$ 分别怎么得来
 手动反传不需要 PyTorch 构建计算图（不调用 `loss.backward()`），
 所以用 `torch.no_grad()` 关闭自动求导追踪可以**节省内存和加速**——
 前向传播中不会记录任何操作到计算图中，因为梯度全由你自己算
+<!--SR:!2026-04-04,3,250-->
+
+
+---
+
+## 代码实现
+
+写出 Softmax + Cross-Entropy 合并反传的 3 行代码（已知 `logits` 形状 (n,27)，`Yb` 是目标索引）：
+?
+```python
+dlogits = F.softmax(logits, 1)
+dlogits[range(n), Yb] -= 1
+dlogits /= n
+```
+<!--SR:!2026-04-04,3,250-->
+
+
+
+已知前向 `logits = h @ W2 + b2`，写出 `dh`、`dW2`、`db2` 的反传代码：
+?
+```python
+dh = dlogits @ W2.t()
+dW2 = h.t() @ dlogits
+db2 = dlogits.sum(0)
+```
+<!--SR:!2026-04-04,3,250-->
+
+
+已知前向 `h = torch.tanh(hpreact)`，写出 `dhpreact` 的反传代码：
+?
+```python
+dhpreact = (1 - h**2) * dh
+```
+关键：tanh 导数 = 1 - tanh²，直接用前向已有的 `h` 避免重新计算
+<!--SR:!2026-04-04,3,250-->
+
+
+已知前向 `hpreact = bngain * bnraw + bnbias`，写出 `dbngain` 和 `dbnbias` 的反传代码：
+?
+```python
+dbngain = (dhpreact * bnraw).sum(0, keepdim=True)
+dbnbias = dhpreact.sum(0, keepdim=True)
+```
+γ 的梯度需要乘以 x̂ 再沿 batch 维求和；β 的梯度直接沿 batch 维求和
+<!--SR:!2026-04-04,3,250-->
+
+
+写出 BatchNorm 合并反传的一行代码（从 `dhpreact` 得到 `dhprebn`），括号内有三项分别对应什么？
+?
+```python
+dhprebn = bngain*bnvar_inv/n * (n*dhpreact - dhpreact.sum(0) - n/(n-1)*bnraw*(dhpreact*bnraw).sum(0))
+```
+三项：`n*dhpreact`（直接反传）、`-dhpreact.sum(0)`（减梯度均值 → μ 路径）、`-n/(n-1)*bnraw*(...)`（减与 x̂ 相关分量 → σ² 路径）
+<!--SR:!2026-04-04,3,250-->
+
+
+嵌入层反传：如何将梯度 `demb` (32,3,10) 累加回嵌入矩阵 `dC` (27,10)？写出代码：
+?
+```python
+dC = torch.zeros_like(C)
+dC.index_add_(0, Xb.view(-1), demb.view(-1, n_embd))
+```
+`Xb.view(-1)` 将 (32,3) 展平为 96 个索引；`demb.view(-1, n_embd)` 展平为 96 个梯度向量；同一字符出现多次时梯度自动累加
+<!--SR:!2026-04-04,3,250-->
+
+
+已知前向 `hprebn = embcat @ W1 + b1`，写出 `dembcat`、`dW1`、`db1` 的反传代码：
+?
+```python
+dembcat = dhprebn @ W1.t()
+dW1 = embcat.t() @ dhprebn
+db1 = dhprebn.sum(0)
+```
+<!--SR:!2026-04-04,3,250-->
+
+
+emb 形状 (32,3,10)，如何展平为 embcat 以及反传时如何还原？
+?
+```python
+# 前向展平：(32,3,10) → (32,30)
+embcat = emb.view(emb.shape[0], -1)
+# 反传还原：(32,30) → (32,3,10)
+demb = dembcat.view(emb.shape)
+```
+<!--SR:!2026-04-04,3,250-->
+
+
+写出交叉熵损失的手动前向计算代码（NLL，已知 `logprobs` 形状 (n,27)，`Yb` 是目标索引）：
+?
+```python
+loss = -logprobs[range(n), Yb].mean()
+```
+`range(n)` 选行，`Yb` 选列 → fancy indexing 取出每个样本正确类别的 log 概率
+<!--SR:!2026-04-04,3,250-->
+
+
+`logprobs` 的梯度是什么样的？写出代码：
+?
+```python
+dlogprobs = torch.zeros_like(logprobs)
+dlogprobs[range(n), Yb] = -1/n
+```
+全零矩阵 (n,27)，只在正确类别位置为 -1/n（负号来自 `-log`，1/n 来自 `mean`）
+<!--SR:!2026-04-04,3,250-->
+
+
+`probs` 的梯度怎么从 `dlogprobs` 得到？（已知前向 `logprobs = probs.log()`）
+?
+```python
+dprobs = dlogprobs * (1/probs)
+```
+log 的导数是 1/x，再乘上游梯度（链式法则）
+<!--SR:!2026-04-04,3,250-->
+
+
+`counts` 同时参与了 `probs = counts * counts_sum_inv` 和 `counts_sum = counts.sum(1)`，写出两条路径的梯度及累加：
+?
+```python
+dcounts_1 = dcounts_sum * torch.ones_like(counts)  # 来自 sum 路径
+dcounts_2 = dprobs * counts_sum_inv                 # 来自 probs 路径
+dcounts = dcounts_1 + dcounts_2                     # 多路径梯度累加
+```
+<!--SR:!2026-04-04,3,250-->
+
+
+已知前向 `counts = norm_logits.exp()`，写出 `dnorm_logits` 的反传代码：
+?
+```python
+dnorm_logits = dcounts * counts
+```
+exp 的导数是自身：d/dx(e^x) = e^x，所以局部导数就是 `counts` 本身
+<!--SR:!2026-04-04,3,250-->
+
+
+写出 BatchNorm 中方差逆平方根的计算代码（需要加 ε 防除零）：
+?
+```python
+bnvar_inv = (bnvar + 1e-5)**-0.5
+```
+即 1/√(σ² + ε)，ε = 1e-5 防止除以零
+<!--SR:!2026-04-04,3,250-->
+
+
+已知前向 `bnvar_inv = (bnvar + 1e-5)^(-0.5)`，用幂法则写出 `dbnvar` 的反传代码：
+?
+```python
+dbnvar = -0.5 * (bnvar + 1e-5)**(-1.5) * dbnvar_inv
+```
+幂法则：d/dx(x^n) = n·x^(n-1)，这里 n = -0.5
+<!--SR:!2026-04-04,3,250-->
+
+
+`max` 操作的反传中，如何用 `scatter` 构造 one-hot mask 使梯度只流回最大值位置？
+?
+```python
+max_indices = logits.max(1, keepdim=True).indices
+one_hot_max = torch.zeros_like(logits).scatter(1, max_indices, 1)
+dlogits_2 = dlogits_maxes * one_hot_max
+```
+<!--SR:!2026-04-04,3,250-->
+
+
+Kaiming 初始化中，针对 tanh 激活函数的缩放系数是什么？写出 W1 的初始化代码：
+?
+```python
+W1 = torch.randn((fan_in, n_hidden)) * (5/3) / (fan_in**0.5)
+```
+5/3 是 tanh 的增益系数（补偿压缩效应），除以 √fan_in 保持输出方差稳定
+<!--SR:!2026-04-04,3,250-->
+
+
+写出 BatchNorm 前向传播的合并一行代码（从 `hprebn` 直接得到 `hpreact`）：
+?
+```python
+hpreact = bngain * (hprebn - hprebn.mean(0, keepdim=True)) / torch.sqrt(hprebn.var(0, keepdim=True, unbiased=True) + 1e-5) + bnbias
+```
+<!--SR:!2026-04-04,3,250-->
+
+
+`cmp()` 中精确匹配和近似匹配分别用什么 PyTorch 函数？
+?
+精确：`torch.all(dt == t.grad)` — 逐元素比较后检查全部为 True
+近似：`torch.allclose(dt, t.grad)` — 允许浮点误差 |a-b| ≤ 1e-8 + 1e-5×|b|
 <!--SR:!2026-04-04,3,250-->
