@@ -15,7 +15,7 @@
                     ▼
 阶段 1 ── 深度学习核心
   ┌─────────────────────────────────────────┐
-  │  Michigan EECS 498-007 / Stanford CS231n │
+  │  Stanford CS231n (Spring 2025 十周年版)   │
   │  Deep Learning for Computer Vision       │
   └─────────────────┬───────────────────────┘
                     │
@@ -96,16 +96,21 @@
 
 ## 阶段 1：深度学习核心
 
-### Michigan EECS 498-007 / Stanford CS231n
+### Stanford CS231n (Spring 2025 十周年纪念版)
 
 > Deep Learning for Computer Vision
 
 **为什么是最好的 DL 入门课：**
 
 - CS231n 由 **Andrej Karpathy** 和 **Fei-Fei Li** 在 Stanford 创建（~2015），是深度学习教育的开山之作
-- 虽然以"计算机视觉"命名，实际覆盖**整个 DL 基础**：反向传播、优化器、正则化、BN、Dropout、CNN、RNN、Transformer、生成模型、自监督学习
+- 虽然以"计算机视觉"命名，实际覆盖**整个 DL 基础**：反向传播、优化器、正则化、BN、Dropout、CNN、RNN、Transformer、ViT、Diffusion、CLIP、DINO、生成模型、自监督学习
 - CS231n 被全球 AI 课程引用为前置或参考，是事实上的 DL 基础标准
-- 推荐 **Michigan EECS 498-007 (Fall 2019, Justin Johnson)** 而非 2017 CS231n 的原因：Justin Johnson 是 CS231n 的联合创始人和核心讲师，密歇根版比 Stanford 公开视频新 2 年，覆盖更多现代内容，且完整公开
+- **2025 春季十周年纪念版**已公开上传 YouTube，讲师阵容：
+  - **Fei-Fei Li** — CS231n 创始人、ImageNet 创建者、Stanford HAI 院长
+  - **Justin Johnson** — CS231n 联合创始人（从密歇根回归 Stanford）
+  - **Ehsan Adeli** — Stanford 助理教授
+  - **Zane Durante** — Stanford 研究员
+  - Guest Lecturers: Jiajun Wu, Ranjay Krishna, Ruohan Gao, Yunzhu Li
 
 **级别**：Stanford 200-level（研究生，高年级本科可选）
 
@@ -116,30 +121,33 @@
 - 基础概率统计 ✅（Coursera ML 覆盖足够）
 - CS229 是软性前置，非硬性要求 ✅（Coursera ML + Karpathy 足够替代）
 
-**课程目录（Stanford 2026 春季版）：**
+**课程目录（Spring 2025 十周年版）：**
 
 | 模块 | 主题 |
 |------|------|
 | **DL 基础** (Lec 1-4) | 计算机视觉概述；线性分类器 (kNN, Softmax)；正则化与优化 (SGD, Momentum, Adam, LR schedule)；神经网络与反向传播 |
-| **视觉感知与理解** (Lec 5-11) | CNN (卷积, 池化)；CNN 架构 (BN, AlexNet, VGG, ResNet, 迁移学习)；RNN (LSTM, GRU, seq2seq)；Attention 与 Transformer (ViT)；目标检测与图像分割；视频理解；大规模分布式训练 |
-| **生成与交互视觉智能** (Lec 12-18) | 自监督学习 (对比学习, DINO)；生成模型 I (VAE, GAN)；生成模型 II (Diffusion)；3D 视觉；视觉与语言；机器人学习；以人为中心的 AI |
+| **视觉感知与理解** (Lec 5-12) | CNN (卷积, 池化)；CNN 架构 (BN, AlexNet, VGG, ResNet, 迁移学习)；RNN (LSTM, GRU, seq2seq)；**Attention 与 Transformers**；**Vision Transformers (ViT)**；目标检测与图像分割；视频理解；大规模分布式训练 |
+| **生成与交互视觉智能** (Lec 13-16) | 自监督学习 (**CLIP, DINO**, 对比学习)；生成模型 I (VAE, GAN)；生成模型 II (**Diffusion Models**)；**Vision-Language Models** |
+| **应用与前沿** (Lec 17-18) | 3D 视觉；机器人学习；以人为中心的 AI |
 
-**Assignments（2024 版）：**
+**Assignments（2025 版）：**
 
 | 作业 | 内容 |
 |------|------|
-| **Assignment 1** | kNN、SVM、Softmax、两层神经网络——全部 NumPy 手写，无框架 |
-| **Assignment 2** | 多层全连接网络、BatchNorm（手写）、Dropout（手写）、CNN（手写）、PyTorch 实战 |
-| **Assignment 3** | RNN 图像描述、Transformer 图像描述、GAN、自监督学习 |
+| **Assignment 1** | 基础运算与图像分类（NumPy 手写，无框架） |
+| **Assignment 2** | CNN 与 PyTorch（BatchNorm、Dropout、卷积手写 + PyTorch 实战） |
+| **Assignment 3** | **Transformers、CLIP、DINO、Diffusion Models**（图像描述、自监督学习、扩散模型） |
 
 **学习资源：**
 
 | 资源 | 链接 |
 |------|------|
-| **首选视频** | [Michigan EECS 498-007 Fall 2019 (Justin Johnson)](https://www.youtube.com/playlist?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r) |
+| **首选视频（2025 十周年版）** | [CS231n Spring 2025 (YouTube)](https://www.youtube.com/watch?v=2fq9wYslV0A&list=PLoROMvodv4rOmsNzYBMe0gJY2XS8AQg16) |
 | 备选视频（Karpathy 主讲） | [CS231n 2016 (YouTube)](https://www.youtube.com/playlist?list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC) |
+| 备选视频（Justin Johnson 密歇根版） | [EECS 498-007 Fall 2019 (YouTube)](https://www.youtube.com/playlist?list=PL5-TkQAfAZFbzxjBHtzdVCWE0Zbhomg7r) |
 | 课程笔记 | [cs231n.github.io](https://cs231n.github.io/) |
-| Assignments | [cs231n.github.io/assignments2024](https://cs231n.github.io/assignments2024/) |
+| Assignments | [cs231n.github.io/assignments2025](https://cs231n.github.io/assignments2025/) |
+| 2025 Lecture Notes (社区) | [GitHub: cs231n-2025-notes](https://github.com/raimbekovm/cs231n-2025-notes) |
 | 数学补充 | [Matrix Calculus You Need for DL (Parr & Howard)](https://explained.ai/matrix-calculus/) |
 
 **预估时间**：6-8 周（每周 40h）
