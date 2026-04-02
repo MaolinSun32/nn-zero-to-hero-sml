@@ -311,7 +311,7 @@ CS224n 用 **1 讲** 覆盖 Transformer 架构。对于 LLM 方向，这远远�
 |------|------|
 | 课程主页 | [cs336.stanford.edu](https://cs336.stanford.edu/) |
 | 2025 春季存档 | [cs336.stanford.edu/spring2025](https://cs336.stanford.edu/spring2025/) |
-| 视频 (2025) | [YouTube](https://www.youtube.com/playlist?list=PLoROMvodv4rOCXd21gf0CF4xr35yINeOy) |
+| 视频 (2025, 17讲, ~22h) | [YouTube Playlist](https://www.youtube.com/playlist?list=PLoROMvodv4rOY23Y0BoGoBGgQ1zmU_MT_) |
 | 代码 | [github.com/stanford-cs336](https://github.com/stanford-cs336) |
 | 衔接桥梁 | Karpathy "Let's reproduce GPT-2 (124M)" 视频（阶段 0 已完成） |
 
@@ -543,7 +543,7 @@ CS236 本质是概率论课程，数学强度**显著高于** CS231n 和 CS224n�
 |------|------|
 | 课程主页 | [rail.eecs.berkeley.edu/deeprlcourse](https://rail.eecs.berkeley.edu/deeprlcourse/) |
 | 大纲 | [rail.eecs.berkeley.edu/deeprlcourse/syllabus](https://rail.eecs.berkeley.edu/deeprlcourse/syllabus/) |
-| 视频 | [YouTube](https://www.youtube.com/playlist?list=PL_iWQOsE6TfURIIhCrlt-wHA9IChE26fC) |
+| 视频 (Fall 2023) | [YouTube Playlist](https://www.youtube.com/playlist?list=PL_iWQOsE6TfX7MaC6C3HcdOf1g337dlC9) |
 
 **预估时间**：8-10 周（每周 40h）
 
