@@ -654,3 +654,295 @@ Silver 课程之后仍需补充（Silver 不覆盖）：PPO 的 clipped surrogat
 | CMU 11-667 | CMU | 研究生 LLM 综述课，6 个作业，Slides 公开 |
 | Princeton COS 597R | Princeton | Sanjeev Arora + Danqi Chen，研讨式，偏研究 |
 | Berkeley CS294 LLM Agents | Berkeley | 专注 LLM Agent，MOOC 公开 |
+
+---
+
+## 附录：Stanford CS 全部课程目录（经网络搜索验证）
+
+> 来源：Stanford Bulletin、Explore Courses、Coursicle、课程官网、Program Sheets 交叉验证。
+> 编号规则：百位 = 难度级别（1xx 本科 / 2xx 研究生 / 3xx 高级研究生）；十位 = 方向领域。
+> 标注 ★ 的课程在本 roadmap 的学习路线中。
+
+### 编号系统
+
+```
+十位数 = 方向领域：
+  x0x  入门/通识            x1x  硬件/系统
+  x2x  AI/语言/ML           x3x  数值/图形学
+  x4x  软件系统             x5x  数学/理论/密码学
+  x6x  算法                 x7x  计算生物学/交叉学科
+  x8x  伦理/社会            x9x  独立研究/教学
+```
+
+### 0-99：通识与服务课程
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 1 | Welcome to the Majors | 专业介绍 | Bulletin |
+| CS 20 | How to Make VR: Introduction to Virtual Reality Design | VR 设计入门 | Coursicle |
+| CS 21SI | AI for Social Good | AI 社会公益 | Bulletin |
+| CS 24 | Minds and Machines | 心智与机器 | Bulletin |
+| CS 41 | Hap.py Code: The Python Programming Language | Python 编程体验 | Bulletin |
+| CS 51 | CS + Social Good Studio: Designing Social Impact Projects | 社会影响项目设计 | Bulletin |
+
+### 100-199：本科核心
+
+#### 编程与系统基础（10x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 101 | Introduction to Computing Principles | 计算原理导论 | edX / 课程官网 |
+| CS 103 | Mathematical Foundations of Computing | 计算的数学基础 | Bulletin / 课程官网 |
+| CS 103A | Mathematical Problem-solving Strategies | 数学解题策略 | Bulletin |
+| CS 105 | Introduction to Computers | 计算机导论 | Bulletin |
+| CS 106A | Programming Methodology | 编程方法学 | Bulletin / 课程官网 |
+| CS 106B | Programming Abstractions | 编程抽象 | Bulletin / HN |
+| CS 106X | Programming Abstractions (Accelerated) | 编程抽象（加速版） | Bulletin |
+| CS 107 | Computer Organization and Systems | 计算机组成与系统 | Bulletin / 课程官网 |
+| CS 107A | Problem-solving Lab for CS 107 | CS 107 解题实验 | Bulletin |
+| CS 108 | Object-Oriented Systems Design | 面向对象系统设计 | Bulletin |
+| CS 109 | Introduction to Probability for Computer Scientists | 计算机科学概率论导论 | Bulletin / 课程官网 |
+| CS 111 | Operating Systems Principles | 操作系统原理 | Bulletin / Program Sheets |
+| CS 112 | Operating Systems Kernel Implementation Project | 操作系统内核实现项目 | Bulletin |
+
+#### AI/语言入门（12x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 124 | From Languages to Information | 从语言到信息 | 课程官网 / Program Sheets |
+
+#### 视觉/图形/应用（13x-14x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 131 | Computer Vision: Foundations and Applications | 计算机视觉：基础与应用 | Coursicle / Program Sheets |
+| CS 142 | Web Applications | Web 应用开发 | Program Sheets |
+| CS 143 | Compilers | 编译器 | Bulletin |
+| CS 144 | Introduction to Computer Networking | 计算机网络导论 | Program Sheets |
+| CS 145 | Data Management and Data Systems | 数据管理与数据系统 | Program Sheets |
+| CS 146 | Introduction to Game Design and Development | 游戏设计与开发导论 | Program Sheets |
+| CS 147 | Introduction to Human-Computer Interaction Design | 人机交互设计导论 | Program Sheets |
+| CS 148 | Introduction to Computer Graphics and Imaging | 计算机图形学与成像导论 | Coursicle / Program Sheets |
+| CS 149 | Parallel Computing | 并行计算 | 课程官网 / Program Sheets |
+
+#### 理论/安全（15x-16x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 151 | Logic Programming | 逻辑编程 | Program Sheets |
+| CS 152 | Trust and Safety Engineering | 信任与安全工程 | Coursicle |
+| CS 153 | Web Security | Web 安全 | Bulletin |
+| CS 154 | Introduction to the Theory of Computation | 计算理论导论 | Program Sheets |
+| CS 155 | Computer and Network Security | 计算机与网络安全 | Program Sheets |
+| CS 157 | Computational Logic | 计算逻辑 | Program Sheets |
+| CS 161 | Design and Analysis of Algorithms | 算法设计与分析 | Bulletin / 课程官网 |
+| CS 166 | Data Structures | 数据结构 | Quora (Stanford student) |
+| CS 168 | The Modern Algorithmic Toolbox | 现代算法工具箱 | Quora (Stanford student) |
+
+#### 交叉/伦理/项目（17x-19x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 170 | Stanford Laptop Orchestra: Composition, Coding, Mail | Stanford 笔记本乐团 | Bulletin |
+| CS 181 | Computers, Ethics, and Public Policy | 计算机、伦理与公共政策 | Program Sheets |
+| CS 185 | Fair and Responsible AI | 公平与负责任的 AI | Bulletin |
+| CS 191 | Senior Project | 毕业项目 | Bulletin |
+| CS 194 | Software Project | 软件项目 | Program Sheets |
+| CS 195 | Supervised Undergraduate Research | 本科生指导研究 | Program Sheets |
+| CS 197 | Computer Science Research | 计算机科学研究 | Bulletin |
+| CS 198 | Teaching Computer Science | 计算机科学教学 | Program Sheets |
+| CS 199 | Independent Work | 独立研究 | Program Sheets |
+
+### 200-299：研究生 / 高年级本科
+
+#### 系统方向（20x-21x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 205L | Continuous Mathematical Methods with an Emphasis on Machine Learning | 面向 ML 的连续数学方法 | 课程官网 |
+| CS 210A | Software Project Experience with Corporate Partners | 企业合作软件项目实践 | Coursicle |
+| CS 212 | Operating Systems and Systems Programming | 操作系统与系统编程 | Pete Warden blog |
+| CS 217 | Hardware Accelerators for Machine Learning | ML 硬件加速器 | Coursicle |
+
+#### AI/NLP/ML 方向（22x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 221 | Artificial Intelligence: Principles and Techniques | 人工智能：原理与技术 | Bulletin |
+| CS 223A | Introduction to Robotics | 机器人学导论 | Program Sheets |
+| ★ CS 224N | Natural Language Processing with Deep Learning | 深度学习自然语言处理 | 课程官网 / Bulletin |
+| CS 224R | Deep Reinforcement Learning | 深度强化学习 | Program Sheets |
+| CS 224S | Spoken Language Processing | 口语处理 | Coursicle |
+| CS 224U | Natural Language Understanding | 自然语言理解 | Coursicle |
+| CS 224V | Conversational Virtual Assistants with Deep Learning | 深度学习对话系统 | 课程官网 |
+| CS 224W | Machine Learning with Graphs | 图机器学习 | Program Sheets |
+| CS 225A | Experimental Robotics | 实验机器人学 | Program Sheets |
+| CS 227B | General Game Playing | 通用博弈 | Program Sheets |
+| CS 228 | Probabilistic Graphical Models: Principles and Techniques | 概率图模型 | Program Sheets / Pete Warden |
+| CS 229 | Machine Learning | 机器学习 | Bulletin / Program Sheets |
+| CS 229M | Machine Learning Theory | 机器学习理论 | Program Sheets |
+
+#### DL/CV/RL/生成模型（23x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 230 | Deep Learning | 深度学习 | 课程官网 / Program Sheets |
+| CS 231A | Computer Vision: From 3D Reconstruction to Recognition | 计算机视觉：从三维重建到识别 | Program Sheets |
+| ★ CS 231N | Deep Learning for Computer Vision | 深度学习与计算机视觉 | 课程官网 / Bulletin |
+| CS 233 | Geometric and Topological Data Analysis | 几何与拓扑数据分析 | Pete Warden / 课程官网 |
+| CS 234 | Reinforcement Learning | 强化学习 | Program Sheets |
+| CS 235 | Computational Methods for Biomedical Image Analysis | 生物医学图像分析的计算方法 | Program Sheets |
+| ★ CS 236 | Deep Generative Models | 深度生成模型 | 课程官网 / Program Sheets |
+| CS 237A | Principles of Robot Autonomy I | 机器人自主原理 I | Bulletin |
+| CS 237B | Principles of Robot Autonomy II | 机器人自主原理 II | Pete Warden |
+| CS 238 | Decision Making under Uncertainty | 不确定性决策 | Program Sheets |
+
+#### 系统方向（24x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 240 | Advanced Topics in Operating Systems | 高级操作系统专题 | Program Sheets |
+| CS 240LX | Advanced Systems Laboratory, Accelerated | 高级系统实验（加速版） | Coursicle |
+| CS 242 | Programming Languages | 编程语言 | 课程官网 |
+| CS 243 | Program Analysis and Optimizations | 程序分析与优化 | Pete Warden |
+| CS 244 | Advanced Topics in Networking | 高级网络专题 | 课程官网 |
+| CS 244B | Distributed Systems | 分布式系统 | Program Sheets |
+| CS 245 | Principles of Data-Intensive Systems | 数据密集型系统原理 | Program Sheets |
+| CS 246 | Mining Massive Data Sets | 大规模数据挖掘 | Pete Warden / Program Sheets |
+| CS 247 | Interaction Design Studio (多个子方向 A/B/I/S) | 交互设计工作坊 | Program Sheets |
+| CS 248 | Interactive Computer Graphics | 交互式计算机图形学 | Program Sheets |
+| CS 249I | The Modern Internet | 现代互联网 | Pete Warden |
+
+#### 理论/密码学/算法（25x-26x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 250 | Algebraic Error Correcting Codes | 代数纠错码 | Program Sheets |
+| CS 251 | Blockchains and Cryptocurrencies | 区块链与加密货币 | Bulletin / 课程官网 |
+| CS 252 | Analysis of Boolean Functions | 布尔函数分析 | Program Sheets |
+| CS 254 | Computational Complexity | 计算复杂性 | Pete Warden / Program Sheets |
+| CS 254B | Computational Complexity II | 计算复杂性 II | Program Sheets |
+| CS 255 | Introduction to Cryptography | 密码学导论 | Pete Warden |
+| CS 256 | Algorithmic Fairness | 算法公平性 | Pete Warden |
+| CS 257 | Logic and Artificial Intelligence | 逻辑与人工智能 | Program Sheets |
+| CS 259Q | Quantum Computing | 量子计算 | Coursicle |
+| CS 261 | Optimization and Algorithmic Paradigms | 优化与算法范式 | Program Sheets |
+| CS 263 | Counting and Sampling | 计数与采样 | Program Sheets |
+| CS 265 | Randomized Algorithms and Probabilistic Analysis | 随机算法与概率分析 | Quora (Stanford student) |
+| CS 269I | Incentives in Computer Science | 计算机科学中的激励机制 | Coursicle |
+
+#### 计算生物学/交叉（27x-28x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 270 | Modeling Biomedical Systems | 生物医学系统建模 | Program Sheets |
+| CS 271 | Artificial Intelligence in Healthcare | AI 医疗 | Pete Warden |
+| CS 272 | Introduction to Biomedical Informatics Research Methodology | 生物医学信息学研究方法导论 | Program Sheets |
+| CS 273A | The Human Genome Source Code | 人类基因组源代码 | Program Sheets |
+| CS 273B | Deep Learning in Genomics and Biomedicine | 基因组学与生物医学深度学习 | Program Sheets |
+| CS 273C | Cloud Computing for Biology and Healthcare | 生物与医疗云计算 | Bulletin |
+| CS 274 | Representations and Algorithms for Computational Molecular Biology | 计算分子生物学的表示与算法 | Program Sheets |
+| CS 275 | Translational Bioinformatics | 转化生物信息学 | Program Sheets |
+| CS 276 | Information Retrieval and Web Search | 信息检索与网络搜索 | Program Sheets |
+| CS 278 | Social Computing | 社会计算 | Program Sheets |
+| CS 279 | Computational Biology: Structure and Organization of Biomolecules | 计算生物学：生物分子结构与组织 | Program Sheets |
+| CS 281 | Ethics of Artificial Intelligence | 人工智能伦理 | Program Sheets |
+
+### 300-399：高级研究生
+
+#### 系统/架构（30x-31x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 300 | Departmental Lecture Series | 系列研讨讲座 | Bulletin |
+| CS 315B | Cloud Computing Seminar | 云计算研讨 | Program Sheets |
+| CS 316 | Advanced Multi-Core Systems | 高级多核系统 | Coursicle |
+| CS 320 | Value of Data and AI | 数据与 AI 的价值 | Program Sheets |
+
+#### AI/ML/机器人（32x-33x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 324 | Advances in Foundation Models | 基础模型前沿 | 课程官网 (可能已停开) |
+| CS 325B | Data for Sustainable Development | 可持续发展数据 | Program Sheets |
+| CS 326 | Topics in Advanced Robotic Manipulation | 高级机器人操作专题 | Program Sheets |
+| CS 327A | Advanced Robotic Manipulation | 高级机器人操作 | Program Sheets |
+| CS 328 | Topics in Computer Vision | 计算机视觉专题 | Program Sheets |
+| CS 330 | Deep Multi-Task and Meta Learning | 深度多任务与元学习 | Bulletin / 课程官网 |
+| CS 331B | Representation Learning in Computer Vision | 计算机视觉表示学习 | Coursicle |
+| CS 332 | Advanced Survey of Reinforcement Learning | 高级强化学习综述 | Coursicle |
+| CS 333 | Safe and Interactive Robotics | 安全交互机器人 | Coursicle |
+| CS 334A | Convex Optimization I (= EE 364A) | 凸优化 I | Program Sheets |
+| CS 335 | Fair, Accountable, and Transparent Deep Learning | 公平、可问责、透明的深度学习 | Program Sheets |
+| ★ CS 336 | Language Modeling from Scratch | 从零构建语言模型 | 课程官网 / YouTube |
+
+#### 软件系统/数据（34x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 341 | Project in Mining Massive Data Sets | 大规模数据挖掘项目 | 课程官网 |
+| CS 342 | Building for Digital Health | 数字健康构建 | Program Sheets |
+| CS 343 | Advanced Topics in Compilers | 高级编译器专题 | Program Sheets |
+| CS 344 | Topics in Computer Networks | 计算机网络专题 | Bulletin |
+| CS 345 | Topics in Database Systems | 数据库系统专题 | Program Sheets |
+| CS 347 | Human-Computer Interaction Research | 人机交互研究 | Coursicle |
+| CS 348A | Computer Graphics: Geometric Modeling & Processing | 计算机图形学：几何建模与处理 | Program Sheets |
+| CS 348B | Computer Graphics: Image Synthesis Techniques | 计算机图形学：图像合成技术 | Coursicle |
+| CS 348C | Computer Graphics: Animation and Simulation | 计算机图形学：动画与仿真 | Program Sheets |
+| CS 348I | Computer Graphics in the Era of AI | AI 时代的计算机图形学 | Pete Warden |
+| CS 348K | Visual Computing Systems | 视觉计算系统 | Program Sheets |
+
+#### 理论/密码/算法（35x-36x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 354 | Topics in Intractability: Unfulfilled Algorithmic Fantasies | 不可解性专题：未实现的算法幻想 | Program Sheets |
+| CS 355 | Advanced Topics in Cryptography | 高级密码学专题 | Program Sheets |
+| CS 356 | Topics in Computer and Network Security | 计算机与网络安全专题 | Program Sheets |
+| CS 357 | Advanced Topics in Formal Methods | 高级形式化方法专题 | Bulletin |
+| CS 358 | Topics in Programming Language Theory | 编程语言理论专题 | Bulletin |
+| CS 361 | Engineering Design Optimization | 工程设计优化 | Program Sheets |
+| CS 364A | Algorithmic Game Theory | 算法博弈论 | Program Sheets |
+
+#### 交叉/生物/研究（37x-39x）
+
+| 编号 | 课程名 | 中文 | 验证状态 |
+|------|--------|------|----------|
+| CS 369O | Optimization Algorithms | 优化算法 | Pete Warden |
+| CS 371 | Computational Biology in Four Dimensions | 四维计算生物学 | 课程官网 |
+| CS 373 | Statistical and ML Methods for Genomics | 基因组学的统计与 ML 方法 | Program Sheets |
+| CS 375 | Large-Scale Neural Network Modeling for Neuroscience | 大规模神经网络神经科学建模 | Program Sheets |
+| CS 384 | Seminar on Ethical and Social Issues in NLP | NLP 伦理与社会议题研讨 | Program Sheets |
+| CS 395 | Seminar in Computer Science Teaching | 计算机科学教学研讨 | Program Sheets |
+| CS 398 | Computational Education | 计算教育 | Program Sheets |
+| CS 399 | Independent Project | 独立项目 | Bulletin |
+
+### Roadmap 课程在全局中的位置
+
+```
+★ 标记课程 = 本 Roadmap 涉及的课程
+
+100-level (本科核心)
+  CS 103  数学基础 ─────────────┐
+  CS 106A/B 编程 ──────────────┤
+  CS 107  系统 ────────────────┤ Stanford 本科生的前置基础
+  CS 109  概率 ────────────────┤ （你用 Coursera ML + LA + Karpathy 替代）
+  CS 111  OS ──────────────────┤
+  CS 161  算法 ────────────────┘
+
+200-level (研究生 / 高年级本科)         300-level (高级研究生)
+  CS 221  AI 入门（门户课）
+  ★ CS 224N  NLP + Transformer ─────────→ CS 324 基础模型前沿
+  CS 228  概率图模型 ───────────────────→ (CS 236 的最佳前置)
+  CS 229  机器学习
+  CS 230  深度学习
+  ★ CS 231N  DL + CV ──────────────────→ CS 328 视觉专题, CS 331B 视觉表示
+  CS 234  强化学习 ─────────────────────→ CS 332 高级 RL 综述
+  ★ CS 236  生成模型
+  CS 246  大数据挖掘 ───────────────────→ CS 341 大数据项目
+                                        CS 330 元学习 (Chelsea Finn)
+                                        ★ CS 336 从零构建 LLM
+
+你的 Roadmap 精准命中 AI/ML 主线（x2x 列），
+跳过了系统(x1x)、软件(x4x)、理论(x5x)、算法(x6x)、生物(x7x) 等分支。
+```
