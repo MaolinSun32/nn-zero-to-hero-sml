@@ -18,7 +18,7 @@ $$\frac{\partial L}{\partial x} = \frac{\partial L}{\partial g} \cdot \frac{\par
 - **exact**：`torch.all(dt == t.grad)`，bit-for-bit 完全相等
 - **approximate**：`torch.allclose(dt, t.grad)`，允许浮点误差（|a-b| ≤ 1e-8 + 1e-5×|b|）
 手动反传和 autograd 的计算路径不同，浮点舍入会导致极微小差异，所以 exact 可能为 False 但 approximate 为 True——推导仍然正确
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-05,22,250-->
 
 
 为什么需要对中间变量调用 `retain_grad()`？
@@ -32,7 +32,7 @@ PyTorch 默认只保留**叶子节点**（参数）的 `.grad`，中间变量的
 ?
 **梯度累加**。例如 `counts` 同时参与了 `probs = counts * counts_sum_inv` 和 `counts_sum = counts.sum(1)`，
 反传时要把两条路径的梯度加起来：`dcounts = dcounts_1 + dcounts_2`
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-05,22,250-->
 
 
 矩阵乘法 Y = A @ B 的反传梯度公式？
@@ -47,7 +47,7 @@ $$\frac{\partial L}{\partial A} = \frac{\partial L}{\partial Y} @ B^T, \qquad \f
 - **前向 sum → 反向广播复制**：梯度从 (1,64) 广播回 (32,64)，每行得到同样的梯度
 - **前向广播 → 反向 sum**：梯度沿广播维度求和
 这是因为 sum 和 broadcast 互为逆运算
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-05,22,250-->
 
 
 loss = -mean(logprobs[range(n), Yb]) 对 logprobs 的梯度是什么？为什么？
@@ -63,7 +63,7 @@ tanh(x) 的导数是什么？如果已知 h = tanh(x)，如何用 h 表示导数
 $$\frac{d}{dx}\tanh(x) = 1 - \tanh^2(x) = 1 - h^2$$
 代码：`dhpreact = (1 - h**2) * dh`
 这避免了重新计算 tanh，直接用前向传播已有的 h
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-06,23,250-->
 
 
 嵌入层反传为什么用 `index_add_` 而不是直接赋值？
@@ -79,7 +79,7 @@ Softmax + Cross-Entropy 合并反传的公式是什么？
 $$\frac{\partial\,\text{loss}}{\partial\, l_i} = \begin{cases} P_i & i \neq y \\ P_i - 1 & i = y \end{cases}$$
 向量形式：$\nabla_{\mathbf{l}}\text{loss} = \mathbf{P} - \mathbf{e}_y$
 代码：`dlogits = softmax(logits); dlogits[range(n), Yb] -= 1; dlogits /= n`
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-04-18,5,230-->
 
 
 为什么 PyTorch 的 `F.cross_entropy` 接收 logits 而不是 probs？
@@ -104,7 +104,7 @@ BatchNorm 反传中，为什么 ∂σ²/∂μ = 0？
 $$\frac{\partial \sigma^2}{\partial \mu} = \frac{-2}{m-1}\sum_i(x_i - \mu) = 0$$
 因为均值的定义就是让 $\sum(x_i - \mu) \equiv 0$。
 所以虽然 μ 出现在方差公式里，但方差对均值的一阶导数恒为零——均值路径和方差路径互不干扰
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-05,22,250-->
 
 
 BatchNorm 合并反传公式中，三项分别对应什么？
@@ -128,7 +128,7 @@ dlogits 可视化热力图中，为什么每行恰好只有一个黑点？黑点
 黑点 = 正确类别位置，梯度值为 $(P_y - 1)/n$（负数，所以在灰度图中显示为黑）。
 含义：梯度下降时 $l_y \leftarrow l_y - lr \times (\text{负数})$，即**把正确答案的 logit 往上推**。
 每行只有一个黑点是因为每个样本只有一个正确答案
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-07,24,250-->
 
 
 Softmax+CE 合并反传公式的推导，$i=y$ 和 $i \neq y$ 分别怎么得来的？
@@ -153,7 +153,7 @@ Softmax+CE 合并反传公式的推导，$i=y$ 和 $i \neq y$ 分别怎么得来
 手动反传不需要 PyTorch 构建计算图（不调用 `loss.backward()`），
 所以用 `torch.no_grad()` 关闭自动求导追踪可以**节省内存和加速**——
 前向传播中不会记录任何操作到计算图中，因为梯度全由你自己算
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-06,23,250-->
 
 
 ---
@@ -187,7 +187,7 @@ db2 = dlogits.sum(0)
 dhpreact = (1 - h**2) * dh
 ```
 关键：tanh 导数 = 1 - tanh²，直接用前向已有的 `h` 避免重新计算
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-05,22,250-->
 
 
 已知前向 `hpreact = bngain * bnraw + bnbias`，写出 `dbngain` 和 `dbnbias` 的反传代码：
@@ -216,7 +216,7 @@ dC = torch.zeros_like(C)
 dC.index_add_(0, Xb.view(-1), demb.view(-1, n_embd))
 ```
 `Xb.view(-1)` 将 (32,3) 展平为 96 个索引；`demb.view(-1, n_embd)` 展平为 96 个梯度向量；同一字符出现多次时梯度自动累加
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-07,24,250-->
 
 
 已知前向 `hprebn = embcat @ W1 + b1`，写出 `dembcat`、`dW1`、`db1` 的反传代码：
@@ -246,7 +246,7 @@ demb = dembcat.view(emb.shape)
 loss = -logprobs[range(n), Yb].mean()
 ```
 `range(n)` 选行，`Yb` 选列 → fancy indexing 取出每个样本正确类别的 log 概率
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-06,23,250-->
 
 
 `logprobs` 的梯度是什么样的？写出代码：
@@ -275,7 +275,7 @@ dcounts_1 = dcounts_sum * torch.ones_like(counts)  # 来自 sum 路径
 dcounts_2 = dprobs * counts_sum_inv                 # 来自 probs 路径
 dcounts = dcounts_1 + dcounts_2                     # 多路径梯度累加
 ```
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-05,22,250-->
 
 
 已知前向 `counts = norm_logits.exp()`，写出 `dnorm_logits` 的反传代码：
@@ -302,7 +302,7 @@ bnvar_inv = (bnvar + 1e-5)**-0.5
 dbnvar = -0.5 * (bnvar + 1e-5)**(-1.5) * dbnvar_inv
 ```
 幂法则：d/dx(x^n) = n·x^(n-1)，这里 n = -0.5
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-07,24,250-->
 
 
 `max` 操作的反传中，如何用 `scatter` 构造 one-hot mask 使梯度只流回最大值位置？
@@ -329,7 +329,7 @@ W1 = torch.randn((fan_in, n_hidden)) * (5/3) / (fan_in**0.5)
 ```python
 hpreact = bngain * (hprebn - hprebn.mean(0, keepdim=True)) / torch.sqrt(hprebn.var(0, keepdim=True, unbiased=True) + 1e-5) + bnbias
 ```
-<!--SR:!2026-04-13,9,250-->
+<!--SR:!2026-05-06,23,250-->
 
 
 `cmp()` 中精确匹配和近似匹配分别用什么 PyTorch 函数？
