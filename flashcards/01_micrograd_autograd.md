@@ -25,7 +25,7 @@ h = 0.0001
 slope = (f(x + h) - f(x)) / h
 ```
 用一个很小的 h 代替极限中的无穷小
-<!--SR:!2026-04-26,19,250-->
+<!--SR:!2026-06-13,48,250-->
 
 
 偏导数（partial derivative）的核心思想是什么？
@@ -73,7 +73,7 @@ Value 幂运算的 backward 规则是什么？
 `out = a ** n` 时：
 `a.grad += n * a.data**(n-1) * out.grad`
 即幂函数求导法则 $\frac{d}{da}a^n = n \cdot a^{n-1}$，再乘以上游梯度
-<!--SR:!2026-04-26,19,250-->
+<!--SR:!2026-06-12,47,250-->
 
 
 tanh 激活函数的公式和导数分别是什么？
@@ -114,7 +114,7 @@ backpropagation 算法的两个核心步骤是什么？
 为什么 backward 开始时要设 `self.grad = 1.0`？
 ?
 因为输出节点对自身的导数 $\frac{\partial L}{\partial L} = 1$，这是链式法则（chain rule）的起点，所有后续梯度都从这个 1.0 开始向后传播
-<!--SR:!2026-04-26,19,250-->
+<!--SR:!2026-06-14,49,250-->
 
 
 拓扑排序（topological sort）在 backpropagation 中的作用是什么？
@@ -163,7 +163,7 @@ Layer 类的结构是什么？
 ?
 一个 Layer 包含 `nout` 个并行的 Neuron，每个 Neuron 接收相同的 `nin` 个输入。
 当 `nout == 1` 时返回单个 Value（而非列表），方便使用
-<!--SR:!2026-04-26,19,250-->
+<!--SR:!2026-06-11,46,250-->
 
 
 MLP 的构造函数 `MLP(3, [4, 4, 1])` 创建了怎样的网络结构？
@@ -217,7 +217,7 @@ loss = sum((yout - ygt)**2 for yout, ygt in zip(ypreds, ys))
 ?
 `p.data += -lr * p.grad`
 梯度指向 loss **增大**最快的方向。要**减小** loss，需要沿梯度的**反方向**移动，所以加负号
-<!--SR:!2026-04-26,19,250-->
+<!--SR:!2026-06-15,50,250-->
 
 
 学习率（learning rate）太大或太小分别会怎样？
@@ -243,7 +243,7 @@ o.backward()
 print(x.grad.item())  # .item() 取出 Python float
 ```
 对比 Value 和 PyTorch 的梯度值是否一致
-<!--SR:!2026-04-25,18,250-->
+<!--SR:!2026-06-09,44,250-->
 
 
 `__repr__` 和 `__str__` 的区别是什么？
@@ -265,7 +265,7 @@ Python 中单下划线 `_name` 和双下划线 `__name__` 命名的区别？
 ?
 定义了 `__call__` 的对象可以像函数一样被调用。
 在 Neuron 类中定义 `__call__(self, x)` 后，可以直接写 `neuron(x)` 来执行前向传播，而不需要 `neuron.forward(x)`
-<!--SR:!2026-04-24,17,250-->
+<!--SR:!2026-06-08,43,250-->
 
 
 Neuron 类的权重和偏置如何初始化？
@@ -282,11 +282,5 @@ self.b = Value(np.random.uniform(-1, 1))
 ?
 若 $y = f(g(x))$，则 $\frac{dy}{dx} = \frac{dy}{dg} \cdot \frac{dg}{dx}$
 在 autograd 中，每个节点的 `_backward` 将上游梯度 `out.grad`（$\frac{dL}{dy}$）乘以局部导数（$\frac{dy}{dx}$），逐层传播回输入节点
-<!--SR:!2026-04-26,19,250-->
+<!--SR:!2026-06-13,48,250-->
 
-
-computation graph 可视化中，`trace` 函数和 `draw_dot` 函数各自的作用？
-?
-- `trace(root)`：从根节点 DFS 遍历，返回 `(nodes, edges)` 集合
-- `draw_dot(root)`：用 graphviz 将 Value 画成 record 形状节点（显示 label | data | grad），操作符画成圆形节点，箭头从输入指向操作再指向输出，布局为从左到右（`rankdir='LR'`）
-<!--SR:!2026-04-25,18,250-->
