@@ -56,7 +56,7 @@ Value 加法运算的 backward 规则是什么？
 `a.grad += 1.0 * out.grad`
 `b.grad += 1.0 * out.grad`
 加法的局部导数都是 1.0，乘以上游梯度 out.grad
-<!--SR:!2026-04-27,20,250-->
+<!--SR:!2026-06-16,50,250-->
 
 
 Value 乘法运算的 backward 规则是什么？
@@ -101,7 +101,7 @@ Value 类中的 type coercion 模式是什么？为什么需要？
 ?
 `other = other if isinstance(other, Value) else Value(other)`
 在每个运算符方法开头将普通数字包装成 Value 对象，这样 `a + 2` 和 `a * 3` 等混合运算才能正常工作
-<!--SR:!2026-04-27,20,250-->
+<!--SR:!2026-06-17,51,250-->
 
 
 backpropagation 算法的两个核心步骤是什么？
@@ -150,7 +150,7 @@ $y = \tanh(w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b)$
 `sum((wi*xi for wi,xi in zip(self.w, x)), self.b)` 中第二个参数 `self.b` 的作用是什么？
 ?
 `sum()` 的第二个参数是**起始值**（start value），所以实际计算的是 `b + w1*x1 + w2*x2 + ...`，巧妙地把 bias 加入了求和过程
-<!--SR:!2026-04-27,20,250-->
+<!--SR:!2026-06-18,52,250-->
 
 
 为什么神经网络需要激活函数（activation function）如 tanh？
@@ -204,7 +204,7 @@ loss = sum((yout - ygt)**2 for yout, ygt in zip(ypreds, ys))
 3. **Zero gradients**：`p.grad = 0.0`（必须在 backward 前清零）
 4. **Backward pass**：`loss.backward()` 计算所有梯度
 5. **Gradient descent update**：`p.data += -lr * p.grad`
-<!--SR:!2026-04-27,20,250-->
+<!--SR:!2026-06-16,50,250-->
 
 
 为什么每次 backward 之前必须把梯度清零（zero gradients）？
@@ -258,7 +258,7 @@ Python 中单下划线 `_name` 和双下划线 `__name__` 命名的区别？
 ?
 - `_name`（单下划线前缀）：约定俗成的"私有"属性，表示内部使用，不建议外部访问
 - `__name__`（双下划线包裹，dunder）：Python 魔术方法（magic method），有特殊语法含义，如 `__init__`、`__add__`、`__call__`
-<!--SR:!2026-04-27,20,250-->
+<!--SR:!2026-06-17,51,250-->
 
 
 `__call__` 魔术方法的作用是什么？在神经网络中如何使用？
