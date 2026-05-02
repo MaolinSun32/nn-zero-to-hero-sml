@@ -15,7 +15,7 @@ $f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$
 在函数的极小值点（minimum），导数等于多少？为什么？
 ?
 导数等于 0。因为极小值点处函数既不增也不减，切线水平，斜率为零
-<!--SR:!2026-05-01,24,250-->
+<!--SR:!2026-07-01,60,250-->
 
 
 用 Python 数值近似求导数的代码模式是什么？
@@ -65,7 +65,7 @@ Value 乘法运算的 backward 规则是什么？
 `a.grad += b.data * out.grad`
 `b.grad += a.data * out.grad`
 对 a 求导得 b，对 b 求导得 a，再分别乘以上游梯度
-<!--SR:!2026-05-01,24,250-->
+<!--SR:!2026-07-04,63,250-->
 
 
 Value 幂运算的 backward 规则是什么？
@@ -108,7 +108,7 @@ backpropagation 算法的两个核心步骤是什么？
 ?
 **Step 1 — Topological sort**：用 DFS 构建拓扑排序，确保每个节点在其所有子节点之后
 **Step 2 — Reverse traversal**：设 `self.grad = 1.0`，然后按拓扑排序的逆序依次调用每个节点的 `_backward()`
-<!--SR:!2026-05-01,24,250-->
+<!--SR:!2026-07-01,60,250-->
 
 
 为什么 backward 开始时要设 `self.grad = 1.0`？
@@ -156,7 +156,7 @@ $y = \tanh(w_1 x_1 + w_2 x_2 + \cdots + w_n x_n + b)$
 为什么神经网络需要激活函数（activation function）如 tanh？
 ?
 没有非线性激活函数，多层线性变换的堆叠等价于单层线性变换（矩阵乘法可以合并）。tanh 引入**非线性**（nonlinearity），使网络能逼近复杂的非线性函数
-<!--SR:!2026-05-01,24,250-->
+<!--SR:!2026-06-30,59,250-->
 
 
 Layer 类的结构是什么？
@@ -200,7 +200,7 @@ loss = sum((yout - ygt)**2 for yout, ygt in zip(ypreds, ys))
 为什么每次 backward 之前必须把梯度清零（zero gradients）？
 ?
 因为 `_backward` 中使用 `+=` 累加梯度。如果不清零，新一轮的梯度会叠加到上一轮的旧梯度上，导致梯度不正确
-<!--SR:!2026-05-01,24,250-->
+<!--SR:!2026-07-02,61,250-->
 
 
 梯度下降（gradient descent）更新公式中为什么是负号？
@@ -265,7 +265,7 @@ self.w = [Value(np.random.uniform(-1, 1)) for _ in range(nin)]
 self.b = Value(np.random.uniform(-1, 1))
 ```
 权重和偏置都从 `[-1, 1]` 均匀分布中随机采样
-<!--SR:!2026-05-01,24,250-->
+<!--SR:!2026-07-03,62,250-->
 
 
 链式法则（chain rule）的核心思想是什么？在 autograd 中如何体现？
