@@ -10,7 +10,7 @@ tags:
 反向传播 = **链式法则的递归应用**。
 每一步的模式：**上游梯度 × 局部导数**。
 $$\frac{\partial L}{\partial x} = \frac{\partial L}{\partial g} \cdot \frac{\partial g}{\partial x}$$
-<!--SR:!2026-05-07,19,250-->
+<!--SR:!2026-06-24,48,250-->
 
 
 `cmp()` 中 exact 和 approximate 分别检查什么？为什么 exact=False 但 approximate=True 仍说明推导正确？
@@ -55,7 +55,7 @@ loss = -mean(logprobs[range(n), Yb]) 对 logprobs 的梯度是什么？为什么
 dlogprobs 是一个全零矩阵 (32,27)，只在 `[i, Yb[i]]` 位置为 **-1/n**。
 因为 loss 只用到了每行中正确类别那一个元素的 log 概率，其余位置的偏导为 0；
 负号来自 `-log`，1/n 来自 `mean`
-<!--SR:!2026-05-07,19,250-->
+<!--SR:!2026-06-23,47,250-->
 
 
 tanh(x) 的导数是什么？如果已知 h = tanh(x)，如何用 h 表示导数？
@@ -197,7 +197,7 @@ dbngain = (dhpreact * bnraw).sum(0, keepdim=True)
 dbnbias = dhpreact.sum(0, keepdim=True)
 ```
 γ 的梯度需要乘以 x̂ 再沿 batch 维求和；β 的梯度直接沿 batch 维求和
-<!--SR:!2026-05-07,19,250-->
+<!--SR:!2026-06-25,49,250-->
 
 
 写出 BatchNorm 合并反传的一行代码（从 `dhpreact` 得到 `dhprebn`），括号内有三项分别对应什么？
@@ -284,7 +284,7 @@ dcounts = dcounts_1 + dcounts_2                     # 多路径梯度累加
 dnorm_logits = dcounts * counts
 ```
 exp 的导数是自身：d/dx(e^x) = e^x，所以局部导数就是 `counts` 本身
-<!--SR:!2026-05-07,19,250-->
+<!--SR:!2026-06-26,50,250-->
 
 
 写出 BatchNorm 中方差逆平方根的计算代码（需要加 ε 防除零）：
