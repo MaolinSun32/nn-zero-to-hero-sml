@@ -39,7 +39,7 @@ PyTorch 默认只保留**叶子节点**（参数）的 `.grad`，中间变量的
 ?
 $$\frac{\partial L}{\partial A} = \frac{\partial L}{\partial Y} @ B^T, \qquad \frac{\partial L}{\partial B} = A^T @ \frac{\partial L}{\partial Y}$$
 记忆技巧：结果形状必须和原矩阵匹配，转置哪个由维度对齐决定
-<!--SR:!2026-05-08,20,250-->
+<!--SR:!2026-06-29,52,250-->
 
 
 前向传播中 `sum(0)` 把 (32,64) → (1,64)，反传时梯度怎么走？反过来呢？
@@ -87,7 +87,7 @@ $$\frac{\partial\,\text{loss}}{\partial\, l_i} = \begin{cases} P_i & i \neq y \\
 将 softmax 和 cross-entropy 合并计算有两个好处：
 1. **梯度简洁**：合并后梯度 = P - e_y，不需要中间变量
 2. **数值稳定**：内部使用 log-sum-exp 技巧避免 exp 溢出（先减最大值再取 exp）
-<!--SR:!2026-05-08,20,250-->
+<!--SR:!2026-06-27,50,250-->
 
 
 BatchNorm 反传中，x_i 通过哪三条路径影响 loss？

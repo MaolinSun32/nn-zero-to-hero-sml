@@ -50,7 +50,7 @@ WaveNet 论文正是用空洞卷积（dilated convolution）实现类似的层�
 ?
 让初始 logits 接近 0 → softmax 输出接近均匀分布 $1/27$ → 初始 loss $\approx -\log(1/27) \approx 3.30$。
 如果权重太大，初始 logits 极端 → softmax "自信地猜错" → loss 爆炸，训练不稳定
-<!--SR:!2026-05-08,20,250-->
+<!--SR:!2026-06-28,51,250-->
 
 
 train loss 下降但 dev loss 上升，说明什么？在这个实验中何时出现的？
