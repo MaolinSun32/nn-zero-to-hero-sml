@@ -18,21 +18,21 @@ $$\frac{\partial L}{\partial x} = \frac{\partial L}{\partial g} \cdot \frac{\par
 - **exact**：`torch.all(dt == t.grad)`，bit-for-bit 完全相等
 - **approximate**：`torch.allclose(dt, t.grad)`，允许浮点误差（|a-b| ≤ 1e-8 + 1e-5×|b|）
 手动反传和 autograd 的计算路径不同，浮点舍入会导致极微小差异，所以 exact 可能为 False 但 approximate 为 True——推导仍然正确
-<!--SR:!2026-05-10,22,250-->
+<!--SR:!2026-07-06,55,250-->
 
 
 为什么需要对中间变量调用 `retain_grad()`？
 ?
 PyTorch 默认只保留**叶子节点**（参数）的 `.grad`，中间变量的梯度在 `backward()` 后会被释放以省内存。
 调用 `retain_grad()` 使中间变量的梯度保留下来，方便用 `cmp()` 对比验证手动梯度
-<!--SR:!2026-05-09,21,250-->
+<!--SR:!2026-07-04,53,250-->
 
 
 同一个变量被多条计算路径使用时，梯度怎么处理？
 ?
 **梯度累加**。例如 `counts` 同时参与了 `probs = counts * counts_sum_inv` 和 `counts_sum = counts.sum(1)`，
 反传时要把两条路径的梯度加起来：`dcounts = dcounts_1 + dcounts_2`
-<!--SR:!2026-05-12,24,250-->
+<!--SR:!2026-07-11,60,250-->
 
 
 矩阵乘法 Y = A @ B 的反传梯度公式？
@@ -47,7 +47,7 @@ $$\frac{\partial L}{\partial A} = \frac{\partial L}{\partial Y} @ B^T, \qquad \f
 - **前向 sum → 反向广播复制**：梯度从 (1,64) 广播回 (32,64)，每行得到同样的梯度
 - **前向广播 → 反向 sum**：梯度沿广播维度求和
 这是因为 sum 和 broadcast 互为逆运算
-<!--SR:!2026-05-11,23,250-->
+<!--SR:!2026-07-09,58,250-->
 
 
 loss = -mean(logprobs[range(n), Yb]) 对 logprobs 的梯度是什么？为什么？
@@ -63,7 +63,7 @@ tanh(x) 的导数是什么？如果已知 h = tanh(x)，如何用 h 表示导数
 $$\frac{d}{dx}\tanh(x) = 1 - \tanh^2(x) = 1 - h^2$$
 代码：`dhpreact = (1 - h**2) * dh`
 这避免了重新计算 tanh，直接用前向传播已有的 h
-<!--SR:!2026-05-10,22,250-->
+<!--SR:!2026-07-05,54,250-->
 
 
 嵌入层反传为什么用 `index_add_` 而不是直接赋值？
@@ -153,7 +153,7 @@ Softmax+CE 合并反传公式的推导，$i=y$ 和 $i \neq y$ 分别怎么得来
 手动反传不需要 PyTorch 构建计算图（不调用 `loss.backward()`），
 所以用 `torch.no_grad()` 关闭自动求导追踪可以**节省内存和加速**——
 前向传播中不会记录任何操作到计算图中，因为梯度全由你自己算
-<!--SR:!2026-05-12,24,250-->
+<!--SR:!2026-07-12,61,250-->
 
 
 ---
