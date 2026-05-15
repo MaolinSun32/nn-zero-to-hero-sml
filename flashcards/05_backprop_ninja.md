@@ -71,7 +71,7 @@ $$\frac{d}{dx}\tanh(x) = 1 - \tanh^2(x) = 1 - h^2$$
 同一个字符可能在 batch 中**出现多次**（比如字符 'a' 可能出现 10 次），
 每次出现都产生一份梯度，这些梯度需要**累加**到 dC 的同一行上。
 `dC.index_add_(0, Xb.view(-1), demb.view(-1, n_embd))` 就是按索引累加
-<!--SR:!2026-05-09,21,250-->
+<!--SR:!2026-07-08,54,250-->
 
 
 Softmax + Cross-Entropy 合并反传的公式是什么？
@@ -128,7 +128,7 @@ dlogits 可视化热力图中，为什么每行恰好只有一个黑点？黑点
 黑点 = 正确类别位置，梯度值为 $(P_y - 1)/n$（负数，所以在灰度图中显示为黑）。
 含义：梯度下降时 $l_y \leftarrow l_y - lr \times (\text{负数})$，即**把正确答案的 logit 往上推**。
 每行只有一个黑点是因为每个样本只有一个正确答案
-<!--SR:!2026-05-10,22,250-->
+<!--SR:!2026-07-10,56,250-->
 
 
 Softmax+CE 合并反传公式的推导，$i=y$ 和 $i \neq y$ 分别怎么得来的？
@@ -226,7 +226,7 @@ dembcat = dhprebn @ W1.t()
 dW1 = embcat.t() @ dhprebn
 db1 = dhprebn.sum(0)
 ```
-<!--SR:!2026-05-09,21,250-->
+<!--SR:!2026-07-09,55,250-->
 
 
 emb 形状 (32,3,10)，如何展平为 embcat 以及反传时如何还原？
@@ -336,4 +336,4 @@ hpreact = bngain * (hprebn - hprebn.mean(0, keepdim=True)) / torch.sqrt(hprebn.v
 ?
 精确：`torch.all(dt == t.grad)` — 逐元素比较后检查全部为 True
 近似：`torch.allclose(dt, t.grad)` — 允许浮点误差 |a-b| ≤ 1e-8 + 1e-5×|b|
-<!--SR:!2026-05-08,20,250-->
+<!--SR:!2026-07-03,49,250-->
